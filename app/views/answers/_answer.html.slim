@@ -1,0 +1,8 @@
+.answer id="answer-#{answer.id}"
+  .contents= answer.contents
+  .details
+    '  Answered on
+    = l(answer.created_at, format: :long)
+    '  by
+    = link_to answer.user, user_path(answer.user)
+
