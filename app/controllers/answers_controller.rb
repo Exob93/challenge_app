@@ -22,7 +22,7 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:answer_id])
     @answer.update(accept: true)
     @answer.user.update(points: @answer.user.points + 25)
-    MailUser.mail_if_q_accepted(@answer.user).deliver
+    MailUser.mail_if_answer_accepted(@answer.user).deliver
     redirect_to question_path(@question), notice: "Answer was successfully approved."
   end
 
