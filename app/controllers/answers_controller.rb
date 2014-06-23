@@ -13,7 +13,7 @@ class AnswersController < ApplicationController
     else
       @answer.liked_by current_user
       @answer.vote_registered?
-
+      @answer.user.points += 5
       @answer.user.save
       redirect_to question_path(@question)
     end
@@ -21,6 +21,7 @@ class AnswersController < ApplicationController
   def accept
     @answer = Answer.find(params[:answer_id])
     @answer.update(accept: true)
+    @answer.user.update(points: @answer.user.points + 25)
     redirect_to question_path(@question), notice: "Answer was successfully approved."
   end
 
