@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :answers
   acts_as_voter
   def to_s
-    email
+    "#{name} #{surname}"
   end
 
   after_save :if_awesome?
