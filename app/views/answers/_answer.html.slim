@@ -6,3 +6,6 @@
     '  by
     = link_to answer.user, user_path(answer.user)
 
+    .field
+      = link_to "Like", like_question_answer_path(@question, answer), method: :put
+      = "#{answer.votes_for.size}"
