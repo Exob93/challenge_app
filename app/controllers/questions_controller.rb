@@ -22,6 +22,8 @@ class QuestionsController < ApplicationController
     @question.user = current_user
 
     if @question.save
+      @question.user.points -= 10
+      @question.user.save!
       redirect_to @question, notice: 'Question was successfully created.'
     else
       render :new
