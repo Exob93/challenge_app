@@ -1,6 +1,7 @@
 .user id="user-#{@user.id}"
   h2= @user
-
+  - if current_user.awesome
+    = image_tag "star.jpeg"
   .questions
     h3 Questions
 

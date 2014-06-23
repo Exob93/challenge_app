@@ -10,4 +10,14 @@ class User < ActiveRecord::Base
   def to_s
     email
   end
+
+  after_save :if_awesome?
+
+  private
+
+  def if_awesome?
+    unless self.awesome
+      self.update(awesome: true) if self.points >= 1000
+    end
+  end
 end
