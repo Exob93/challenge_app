@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :questions do
     resources :answers, only: [:create] do
+      put "accept", to: "answers#accept"
       member do
       put "like", to: "answers#uplike"
       put "dislike", to: "answers#downlike"

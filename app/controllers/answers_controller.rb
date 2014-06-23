@@ -18,6 +18,11 @@ class AnswersController < ApplicationController
       redirect_to question_path(@question)
     end
   end
+  def accept
+    @answer = Answer.find(params[:answer_id])
+    @answer.update(accept: true)
+    redirect_to question_path(@question), notice: "Answer was successfully approved."
+  end
 
   def create
     @answer = Answer.new(answer_params)

@@ -9,3 +9,7 @@
     .field
       = link_to "Like", like_question_answer_path(@question, answer), method: :put
       = "#{answer.votes_for.size}"
+      - if current_user == @question.user && @question.answers.where(accept: true).empty?
+        = link_to "Mark as accepted", question_answer_accept_path(answer.question, answer), method: :put
+      - if answer.accept
+        |' Accepted!
