@@ -8,9 +8,14 @@ class User < ActiveRecord::Base
   has_many :answers
   acts_as_voter
   def to_s
-    "#{name} #{surname}"
+    unless name.empty? && surname.empty?
+      "#{name} #{surname}"
+    else
+      email
+    end
   end
-
+  has_attached_file :avatar, :styles => { :thumb => "100x100" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   after_save :if_awesome?
 
   private

@@ -1,6 +1,7 @@
 .user id="user-#{@user.id}"
+  = image_tag @user.avatar.url(:thumb)
   h2= @user
-  - if current_user.awesome
+  - if @user.awesome
     = image_tag "star.jpeg"
   .questions
     h3 Questions
