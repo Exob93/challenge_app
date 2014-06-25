@@ -22,7 +22,10 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:answer_id])
     @answer.update(accept: true)
     @answer.user.update(points: @answer.user.points + 25)
+    Thread.new do
     MailUser.mail_if_answer_accepted(@answer.user).deliver
+    ActiveRecord::Base.connection.execute
+    end
     redirect_to question_path(@question), notice: "Answer was successfully approved."
   end
 
@@ -31,7 +34,11 @@ class AnswersController < ApplicationController
     @answer.user = current_user
     @answer.question = @question
     if @answer.save
+
+      Thread.new do
       MailUser.mail_if_add_answer(@answer.question.user).deliver
+      ActiveRecord::Base.connection.execute
+      end
       redirect_to question_path(@question), notice: "Answer was successfully created."
     else
       redirect_to question_path(@question), alert: "There was an error when adding answer."
