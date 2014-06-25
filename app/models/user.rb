@@ -8,10 +8,10 @@ class User < ActiveRecord::Base
   has_many :answers
   acts_as_voter
   def to_s
-    unless name.empty? && surname.empty?
-      "#{name} #{surname}"
-    else
+    unless name.present? && surname.present?
       email
+    else
+      "#{name} #{surname}"
     end
   end
   has_attached_file :avatar, :styles => { :thumb => "100x100" }, :default_url => "/images/:style/missing.png"

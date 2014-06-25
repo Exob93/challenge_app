@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user
-
   def show
+  end
+
+  def ranking
+      @users = User.all.order(points: :desc)
   end
 
   private

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
     end
     end
-
+  get 'users/ranking'
   resources :users, only: [:show]
 
   # The priority is based upon order of creation: first created -> highest priority.
