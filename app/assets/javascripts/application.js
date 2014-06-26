@@ -14,3 +14,15 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+jQuery(function($) {
+    $("a.ajax")
+        .bind("ajax:loading", console.log('loading'))
+        .bind("ajax:complete", console.log('complete'))
+        .bind("ajax:success", function (event, data, status, xhr) {
+            console.log(data);
+        })
+        .bind("ajax:failure", function (xhr, status, error) {
+            console.log(error);
+        });
+});
